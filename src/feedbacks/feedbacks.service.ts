@@ -6,9 +6,7 @@ import { FeedBackDto } from './dto'
 export class FeedbacksService {
   constructor(private prisma: PrismaService) {}
 
-  async feedbacks({ email, name, text }: FeedBackDto) {
-    console.log(email, name, text)
-
+  async postFeedback({ email, name, text }: FeedBackDto) {
     const feedback = await this.prisma.feedBack.create({
       data: {
         name,
@@ -18,5 +16,9 @@ export class FeedbacksService {
     })
 
     return feedback
+  }
+
+  async getFeedback() {
+    return this.prisma.feedBack.findMany()
   }
 }

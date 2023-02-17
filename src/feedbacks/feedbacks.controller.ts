@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common'
-import { Body, Post } from '@nestjs/common/decorators'
+import { Body, Get, Post } from '@nestjs/common/decorators'
 import { FeedBackDto } from './dto'
 import { FeedbacksService } from './feedbacks.service'
 
@@ -8,7 +8,12 @@ export class FeedbacksController {
   constructor(private feedbacksService: FeedbacksService) {}
 
   @Post('feedbacks')
-  feedbacks(@Body() dto: FeedBackDto) {
-    return this.feedbacksService.feedbacks(dto)
+  postFeedback(@Body() dto: FeedBackDto) {
+    return this.feedbacksService.postFeedback(dto)
+  }
+
+  @Get('feedbacks')
+  getFeedback() {
+    return this.feedbacksService.getFeedback()
   }
 }
